@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph-Oki Israel — Web Designer & Developer</title>
+    <meta name="description" content="I build fast, modern websites for small businesses ready to grow online.">
+
+    <style>
+        /* ============================================
+           CSS RESET & VARIABLES
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #fafafa;
+            --color-surface: #ffffff;
+            --color-text: #1a1a1a;
+            --color-text-secondary: #666666;
+            --color-accent: #2563eb;
+            --color-accent-hover: #1d4ed8;
+            --color-border: #e5e5e5;
+            --color-muted: #f3f4f6;
+
+            --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+            --radius: 12px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+        h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+
+        p {
+            color: var(--color-text-secondary);
+            font-size: 1.125rem;
+            line-height: 1.7;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--color-text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-text);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-text);
+            margin: 5px 0;
+            transition: var(--transition);
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text);
+            border: 2px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-text);
+            background: var(--color-text);
+            color: white;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 72px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            max-width: 540px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-text);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: var(--color-muted);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+        }
+
+        /* ============================================
+           PORTFOLIO SECTION
+           ============================================ */
+        .portfolio-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .project-image {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: 'Project Screenshot';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            opacity: 0.7;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-accent);
+            background: rgba(37, 99, 235, 0.08);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        .project-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            font-size: 0.9375rem;
+        }
+
+        .project-link:hover {
+            gap: 0.75rem;
+        }
+
+        .project-link::after {
+            content: '→';
+        }
+
+        /* ============================================
+           SERVICES SECTION
+           ============================================ */
+        .services {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--color-border);
+            background: var(--color-bg);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            font-size: 0.9375rem;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+
+        /* ============================================
+           PROCESS SECTION
+           ============================================ */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            position: relative;
+            padding: 2rem;
+        }
+
+        .process-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: 0;
+            left: 2rem;
+            font-size: 6rem;
+            font-weight: 800;
+            color: var(--color-border);
+            line-height: 1;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .process-step h3 {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .process-step p {
+            position: relative;
+            z-index: 1;
+            font-size: 1rem;
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info > p {
+            margin-bottom: 2rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-method-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-muted);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .contact-method h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-method a {
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+
+        .contact-method a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: var(--color-surface);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--color-border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--color-text);
+            background: var(--color-bg);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-hint {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--color-text);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-brand {
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9375rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-copy {
+            width: 100%;
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .portfolio-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ============================================
+           SCROLLBAR
+           ============================================ */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         NAVIGATION
+         ============================================ -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">Joseph-Oki.</a>
+            <ul class="nav-links">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="section-label">Web Designer & Developer</span>
+                <h1>I build fast, modern websites for small businesses ready to grow online.</h1>
+                <p>Two personal projects, zero client work, and a lot of ambition. I build with an AI-assisted workflow that means faster delivery, cleaner code, and better results — all at a competitive rate while I grow my portfolio.</p>
+                <div class="btn-group">
+                    <a href="#work" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Let's Talk</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Projects Built</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Attention on You</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24h</span>
+                        <span class="stat-label">Response Time</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PORTFOLIO SECTION
+         ============================================ -->
+    <section id="work">
+        <div class="container">
+            <div class="portfolio-header">
+                <span class="section-label">Selected Work</span>
+                <h2>Projects I've Built</h2>
+                <p>Every project is a case study in problem-solving, attention to detail, and clean execution. Yes — this very website is one of them. These are the foundations of what I can build for you.</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Project 1: This Very Portfolio -->
+                <article class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);"></div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Personal Project</span>
+                            <span class="project-tag">Responsive</span>
+                            <span class="project-tag">AI-Assisted</span>
+                        </div>
+                        <h3>This Portfolio Website</h3>
+                        <p>The site you're looking at right now. Built from scratch with semantic HTML, smooth scroll animations, a working contact form, and fully responsive design. AI-assisted development sped up the build without sacrificing quality.</p>
+                        <a href="#" class="project-link" onclick="alert('You are already here! 👋')">You Are Here →</a>
+                    </div>
+                </article>
+
+                <!-- Project 2: E-Commerce Frontend -->
+                <article class="project-card">
+                    <div class="project-image"><img src="ecommerce-project.jpg" alt="JoyfulLight E-Commerce Store" style="width:100%;height:100%;object-fit:cover;"></div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Personal Project</span>
+                            <span class="project-tag">E-Commerce</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                        <h3>E-Commerce Frontend Interface</h3>
+                        <p>A dynamic e-commerce frontend for "JoyfulLight" with a fully functional cart system. Features product browsing, add-to-cart logic, quantity management, price calculations, and a responsive checkout flow.</p>
+                        <a href="#" class="project-link">View Case Study</a>
+                    </div>
+                </article>
+
+                <!-- Project 3: Concept -->
+                <article class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);"></div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Concept Project</span>
+                            <span class="project-tag">UI/UX</span>
+                        </div>
+                        <h3>Restaurant Website Concept</h3>
+                        <p>A concept project built to showcase my ability to design for the hospitality industry. Features menu integration, reservation flow, and brand storytelling.</p>
+                        <a href="#" class="project-link">View Case Study</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT SECTION
+         ============================================ -->
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="joseph-oki.jpg" alt="Joseph-Oki Israel">
+                </div>
+                <div class="about-content">
+                    <span class="section-label">About Me</span>
+                    <h2>I'm Joseph-Oki Israel, a web designer who believes great websites should be simple, fast, and effective.</h2>
+                    <p>I got into web design because I was tired of seeing small businesses struggle with slow, confusing websites that don't convert. So I taught myself to build better ones.</p>
+                    <p style="margin-top: 1rem;">I've completed two personal projects from scratch — including a fully functional e-commerce frontend with dynamic cart logic — learning everything from responsive design to JavaScript interactivity. I also leverage AI-assisted development tools to speed up workflows, catch bugs early, and deliver higher-quality code faster. Now I'm looking for my first client work, which means you get my full attention, my best ideas, and a partner who's genuinely invested in your success.</p>
+
+                    <div class="skills-list">
+                        <span class="skill-tag">HTML & CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Responsive Design</span>
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">E-Commerce</span>
+                        <span class="skill-tag">DOM Manipulation</span>
+                        <span class="skill-tag">AI-Assisted Development</span>
+                        <span class="skill-tag">SEO Basics</span>
+                        <span class="skill-tag">Performance</span>
+                        <span class="skill-tag">Accessibility</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICES SECTION
+         ============================================ -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="portfolio-header">
+                <span class="section-label">What I Offer</span>
+                <h2>Services Built Around Your Needs</h2>
+                <p>Clear deliverables, transparent process, and no surprises. Here's how I can help your business grow online.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Starter Website</h3>
+                    <p>Perfect for new businesses or personal brands. A professional 1-3 page site that establishes your online presence.</p>
+                    <ul class="service-features">
+                        <li>Responsive design (mobile, tablet, desktop)</li>
+                        <li>Contact form integration</li>
+                        <li>Basic SEO setup</li>
+                        <li>1 week turnaround</li>
+                        <li>1 round of revisions</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Business Website</h3>
+                    <p>A complete online presence for established businesses. Multiple pages, content management, and room to grow — built with AI-assisted workflows for speed and precision.</p>
+                    <ul class="service-features">
+                        <li>5+ custom pages</li>
+                        <li>CMS integration (easy updates)</li>
+                        <li>Blog setup</li>
+                        <li>Advanced SEO & analytics</li>
+                        <li>AI-assisted code quality checks</li>
+                        <li>2-3 week turnaround</li>
+                        <li>2 rounds of revisions</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🛒</div>
+                    <h3>E-Commerce Frontend</h3>
+                    <p>Product showcases, shopping carts, and checkout flows. I build the frontend experience that turns browsers into buyers — with AI-assisted optimization for performance and UX.</p>
+                    <ul class="service-features">
+                        <li>Product grid & detail pages</li>
+                        <li>Dynamic cart system</li>
+                        <li>Quantity & price calculations</li>
+                        <li>Mobile-optimized checkout</li>
+                        <li>Payment UI integration</li>
+                        <li>AI-assisted performance tuning</li>
+                        <li>2-3 week turnaround</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Process -->
+            <div style="margin-top: 5rem;">
+                <div class="portfolio-header">
+                    <span class="section-label">How We Work Together</span>
+                    <h2>Simple Process, Great Results</h2>
+                </div>
+                <div class="process-steps">
+                    <div class="process-step" data-step="01">
+                        <h3>Discovery</h3>
+                        <p>We talk about your goals, your audience, and what success looks like. I'll ask the right questions to understand your business.</p>
+                    </div>
+                    <div class="process-step" data-step="02">
+                        <h3>Design</h3>
+                        <p>I create wireframes and a visual direction. You'll see exactly what we're building before we write a single line of code.</p>
+                    </div>
+                    <div class="process-step" data-step="03">
+                        <h3>Build</h3>
+                        <p>I build your site with clean, modern code. You'll get regular updates and a private preview link to track progress.</p>
+                    </div>
+                    <div class="process-step" data-step="04">
+                        <h3>Launch</h3>
+                        <p>We test everything, optimize performance, and launch. I handle the technical setup so you can focus on your business.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT SECTION
+         ============================================ -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <span class="section-label">Get In Touch</span>
+                    <h2>Have a project in mind? I'd love to hear about it.</h2>
+                    <p>I'm currently available for new projects starting next month. Whether you need a full website, an e-commerce frontend, or just want to explore what's possible, let's start a conversation.</p>
+
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-method-icon">✉️</div>
+                            <div>
+                                <h4>Email Me</h4>
+                                <a href="mailto:israeljosephoki@gmail.com">israeljosephoki@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-method-icon">💼</div>
+                            <div>
+                                <h4>LinkedIn</h4>
+                                <a href="#" target="_blank">linkedin.com/in/joseph-oki-israel-142807270</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-method-icon">📍</div>
+                            <div>
+                                <h4>Location</h4>
+                                <span style="color: var(--color-text-secondary);">Available Worldwide (Remote)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="form-hint" style="margin-top: 2rem; font-style: italic;">"I respond to every inquiry within 24 hours. No automated replies — just me, ready to help."</p>
+                </div>
+
+                <div class="contact-form">
+                    <!-- 
+                        FORM SETUP OPTIONS (pick one):
+
+                        OPTION 1 - FORMSPREE (Recommended): 
+                        Sign up at formspree.io, create a form, copy your ID, 
+                        and replace YOUR_FORM_ID below.
+
+                        OPTION 2 - NETLIFY FORMS (If deploying to Netlify):
+                        Just add data-netlify="true" to the form tag. Zero config.
+
+                        OPTION 3 - MAILTO FALLBACK (Works immediately):
+                        If you don't change the action below, the form will open 
+                        the user's email client with all details pre-filled.
+                    -->
+                    <form 
+                        id="contactForm"
+                        action="https://formspree.io/f/xnjrznvv" 
+                        method="POST"
+                        data-netlify="true"
+                        name="portfolio-contact"
+                    >
+                        <!-- Hidden field for Netlify form handling -->
+                        <input type="hidden" name="form-name" value="portfolio-contact">
+
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Smith">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="john@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="project">Project Type</label>
+                            <select id="project" name="project" required>
+                                <option value="" disabled selected>Select a service...</option>
+                                <option value="starter">Starter Website</option>
+                                <option value="business">Business Website</option>
+                                <option value="ecommerce">E-Commerce Frontend</option>
+                                <option value="refresh">Website Refresh</option>
+                                <option value="other">Something Else</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Tell Me About Your Project</label>
+                            <textarea id="message" name="message" required placeholder="What does your business do? What are your goals for this website? Do you have a timeline in mind?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Budget Range (Optional)</label>
+                            <select id="budget" name="budget">
+                                <option value="" disabled selected>Select a range...</option>
+                                <option value="under-1k">Under $1,000</option>
+                                <option value="1k-3k">$1,000 - $3,000</option>
+                                <option value="3k-5k">$3,000 - $5,000</option>
+                                <option value="5k-plus">$5,000+</option>
+                                <option value="not-sure">Not sure yet</option>
+                            </select>
+                            <p class="form-hint">This helps me suggest the best approach for your needs.</p>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        <p id="formStatus" style="margin-top: 1rem; font-size: 0.875rem; text-align: center; color: var(--color-text-secondary);"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">Joseph-Oki.</div>
+                <ul class="footer-links">
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="footer-copy">
+                    © 2026 Joseph-Oki Israel. Built with care and a lot of coffee.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         SCRIPTS
+         ============================================ -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '72px';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.background = 'var(--color-bg)';
+            navLinks.style.padding = '2rem';
+            navLinks.style.borderBottom = '1px solid var(--color-border)';
+            navLinks.style.backdropFilter = 'blur(12px)';
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Animate sections on scroll
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            observer.observe(section);
+        });
+
+        // Smart form handling with fallback
+        const form = document.getElementById('contactForm');
+        const formAction = form.getAttribute('action');
+        const statusMsg = document.getElementById('formStatus');
+
+        form.addEventListener('submit', (e) => {
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+
+            // If Formspree is NOT set up yet (still has placeholder)
+            if (formAction.includes('YOUR_FORM_ID')) {
+                e.preventDefault();
+
+                // Build a mailto link with all form data pre-filled
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const project = document.getElementById('project').value;
+                const message = document.getElementById('message').value;
+                const budget = document.getElementById('budget').value;
+
+                const subject = encodeURIComponent(`New Project Inquiry from ${name}`);
+                const body = encodeURIComponent(
+                    `Name: ${name}
+` +
+                    `Email: ${email}
+` +
+                    `Project Type: ${project}
+` +
+                    `Budget: ${budget || 'Not specified'}
+
+` +
+                    `Message:
+${message}`
+                );
+
+                window.location.href = `mailto:israeljosephoki@gmail.com?subject=${subject}&body=${body}`;
+
+                statusMsg.textContent = 'Opening your email app with the message pre-filled...';
+                statusMsg.style.color = 'var(--color-accent)';
+                return;
+            }
+
+            // Formspree is set up — show sending state
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            statusMsg.textContent = '';
+        });
+
+        // Active nav link highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.color = 'var(--color-accent)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
